@@ -1,0 +1,15 @@
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        def mul(num1, num2):
+            if len(num1) == 1 or len(num2) == 1:
+                return int(num1) * int(num2)
+            m = min(len(num1), len(num2)) // 2
+            a, b = num1[:len(num1) - m], num1[len(num1) - m:]
+            c, d = num2[:len(num2) - m], num2[len(num2) - m:]
+            z0 = mul(b, d)
+            z2 = mul(a, c)
+            z1 = mul(str(int(a) + int(b)), str(int(c) + int(d))) - z2 - z0
+            return (10 ** (2 * m)) * z2 + (10 ** m) * z1 + z0
+
+        return str(mul(num1, num2))    
+        
